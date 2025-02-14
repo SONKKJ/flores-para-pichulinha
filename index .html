@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Pichulinha 💖</title>
+    <!-- Google Fonts - Dancing Script -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos gerais */
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Tela inicial */
+        #startScreen {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #startScreen h1 {
+            margin: 0;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #startScreen .photos {
+            display: flex;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        #startScreen img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #startButton {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        #startButton:hover {
+            background-color: #ff4a3d;
+        }
+
+        /* Animação de fundo estrelado */
+        #stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Animação dos corações */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4a3d;
+            transform: rotate(-45deg);
+            animation: float 5s infinite ease-in;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4a3d;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animação das flores */
+        .flower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('flor.png'); /* Imagem da flor */
+            background-size: cover;
+            animation: floatFlower 8s infinite ease-in;
+        }
+
+        @keyframes floatFlower {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mensagem flutuante */
+        .mensagem {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            font-size: 32px;
+            text-align: center;
+            animation: fadeIn 3s ease-in-out;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Animação de digitação */
+        .typing-animation {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid white; /* Cursor piscando */
+            white-space: nowrap;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        /* Imagens na tela de animação */
+        .photo-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .photo-display img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: floatImage 6s infinite ease-in-out;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela inicial -->
+    <div id="startScreen">
+        <h1>Clique para abrir! 💖</h1>
+        <div class="photos">
+            <img src="photo1.jpg" alt="Foto 1">
+            <img src="photo2.jpg" alt="Foto 2">
+        </div>
+        <button id="startButton">Abrir</button>
+    </div>
+
+    <!-- Fundo estrelado -->
+    <div id="stars"></div>
+
+    <!-- Mensagem -->
+    <div class="mensagem" style="display: none;">
+        <div class="typing-animation">
+            Feliz Dia dos Namorados, Pichulinha! ❤️<br>
+            Você é a pessoa mais incrível do mundo pra mim! 😘<br>
+            Cada momento ao seu lado é mágico e especial. 💘<br>
+            Te amo infinito!!! 💕✨
+        </div>
+    </div>
+
+    <!-- Imagens na tela de animação -->
+    <div class="photo-display" style="display: none;">
+        <img src="photo3.jpg" alt="Foto 3">
+        <img src="photo4.jpg" alt="Foto 4">
+    </div>
+
+    <!-- Áudio -->
+    <audio id="musicPlayer" autoplay loop style="display: none;">
+        <source src="sua_musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script>
+        // Configurações iniciais
+        const startScreen = document.getElementById("startScreen");
+        const mensagem = document.querySelector(".mensagem");
+        const photoDisplay = document.querySelector(".photo-display");
+        const musicPlayer = document.getElementById("musicPlayer");
+        const starsContainer = document.getElementById("stars");
+
+        // Criar estrelas
+        function createStars() {
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement("div");
+                star.classList.add("star");
+                star.style.top = Math.random() * 100 + "vh";
+                star.style.left = Math.random() * 100 + "vw";
+                star.style.animationDelay = Math.random() * 2 + "s";
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Criar flores
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            flower.style.left = Math.random() * 100 + "vw";
+            flower.style.animationDuration = Math.random() * 5 + 3 + "s";
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 8000);
+        }
+
+        // Criar corações
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Iniciar animação
+        document.getElementById("startButton").addEventListener("click", function () {
+            startScreen.style.display = "none";
+            mensagem.style.display = "block";
+            photoDisplay.style.display = "flex";
+            musicPlayer.play();
+
+            // Criar estrelas
+            createStars();
+
+            // Criar flores infinitas
+            setInterval(createFlower, 1000);
+
+            // Criar corações infinitos
+            setInterval(createHeart, 100);
+        });
+    </script>
+</body>
+</html>
